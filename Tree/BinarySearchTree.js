@@ -51,12 +51,18 @@ class BinarySearchTree {
 
         while(currentNode && !flag) {
             if(data < currentNode.data) {
+
                 currentNode = currentNode.left;
+
             } else if (data > currentNode.data) {
+
                 currentNode = currentNode.right;
+
             } else {
+
                 flag = true;
                 break;
+
             }
         }
 
@@ -80,4 +86,60 @@ class BinarySearchTree {
 
         return data;
     }
+
+    dfsPreOrder() {
+        const data = [];
+        const currentNode = this.root;
+
+        const traverse = (currentNode) => {
+            data.push(currentNode.data);
+            
+            if(currentNode.left) traverse(currentNode.left);
+            if(currentNode.right) traverse(currentNode.right);
+        }
+
+        traverse(currentNode);
+        return data;
+    }
+
+    dfsPostOrder() {
+        const data = [];
+        const currentNode = this.root;
+
+        const traverse = (currentNode) => {
+            if(currentNode.left) traverse(currentNode.left);
+            if(currentNode.right) traverse(currentNode.right);
+            
+            data.push(currentNode.data);
+        }
+
+        traverse(currentNode);
+        return data;
+    }
+
+    dfsInOrder() {
+        const data = [];
+        const currentNode = this.root;
+
+        const traverse = (currentNode) => {
+            if(currentNode.left) traverse(currentNode.left);
+
+            data.push(currentNode.data);
+
+            if(currentNode.right) traverse(currentNode.right);
+        }
+
+        traverse(currentNode);
+        return data;
+    }
 }
+
+const tree = new BinarySearchTree();
+tree.insert(10);
+tree.insert(6);
+tree.insert(15);
+tree.insert(3);
+tree.insert(8);
+tree.insert(29);
+
+console.log(tree.dfsPreOrder());
